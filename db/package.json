@@ -1,0 +1,12 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "db-migrate": "^0.11.6"
+  },
+  "dependencies": {
+    "db-migrate-pg": "^1.0.0"
+  }
+}
