@@ -1,3 +1,29 @@
+"""All input for the `authenticate` mutation."""
+input AuthenticateInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  email: String!
+  password: String!
+}
+
+"""The output of our `authenticate` mutation."""
+type AuthenticatePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  jwtToken: JwtToken
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
 """All input for the create `User` mutation."""
 input CreateUserInput {
   """
@@ -76,6 +102,11 @@ type DeleteUserPayload {
   ): UsersEdge
 }
 
+type JwtToken {
+  role: String
+  userId: UUID
+}
+
 """
 The root mutation type which contains root level fields which mutate data.
 """
@@ -103,6 +134,18 @@ type Mutation {
     """
     input: DeleteUserByUsernameInput!
   ): DeleteUserPayload
+  authenticate(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: AuthenticateInput!
+  ): AuthenticatePayload
+  registerUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: RegisterUserInput!
+  ): RegisterUserPayload
 }
 
 """An object with a globally unique `ID`."""
@@ -176,6 +219,39 @@ type Query implements Node {
     condition: UserCondition
   ): UsersConnection
   userByUsername(username: String!): User
+}
+
+"""All input for the `registerUser` mutation."""
+input RegisterUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  email: String!
+  username: String!
+  password: String!
+}
+
+"""The output of our `registerUser` mutation."""
+type RegisterUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  user: User
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `User`. May be used by Relay 1."""
+  userEdge(
+    """The method to use when ordering `User`."""
+    orderBy: [UsersOrderBy!] = [NATURAL]
+  ): UsersEdge
 }
 
 """All input for the `updateUserByUsername` mutation."""

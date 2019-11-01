@@ -9,6 +9,7 @@ import { environment } from './environment';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 const Home = lazy(() => import('./pages/Home'));
+const Admin = lazy(() => import('./pages/Admin'));
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Suspense fallback={<Loader />}>
             <GlobalStyle />
             <Switch>
+              <Route path="/admin" component={Admin} />
               <Route component={Home} />
             </Switch>
           </Suspense>

@@ -5,12 +5,12 @@ export type HomeQueryVariables = {};
 export type HomeQueryResponse = {
     readonly allUsers: {
         readonly edges: ReadonlyArray<{
-            readonly cursor: unknown | null;
+            readonly cursor: string | null;
             readonly node: {
-                readonly id: unknown;
+                readonly id: string;
                 readonly username: string;
-                readonly createdAt: unknown;
-                readonly updatedAt: unknown;
+                readonly createdAt: Date;
+                readonly updatedAt: Date;
             } | null;
         }>;
     } | null;
