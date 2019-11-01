@@ -19,7 +19,7 @@ app.use(
     graphiql: isDev,
     enhanceGraphiql: isDev,
     watchPg: isDev,
-    exportGqlSchemaPath: isDev && '../app/data/schema.graphql',
+    exportGqlSchemaPath: isDev && '../data/schema.graphql',
   }),
 );
 
