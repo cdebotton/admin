@@ -1,6 +1,7 @@
 import React from 'react';
 import graphql from 'babel-plugin-relay/macro';
 import { preloadQuery, usePreloadedQuery } from 'react-relay/hooks';
+
 import { environment } from '../environment';
 
 const query = graphql`

@@ -10,8 +10,10 @@
     "@types/react-relay": "^7.0.0",
     "@types/react-router-dom": "^5.1.1",
     "@types/styled-components": "^4.1.20",
+    "@types/yup": "^0.26.24",
     "babel-plugin-relay": "^7.0.0",
     "eslint-plugin-jest": "^23.0.2",
+    "formik": "^2.0.3",
     "graphql": "^14.5.8",
     "graphql-compiler": "^1.7.0",
     "polished": "^3.4.2",
@@ -20,11 +22,12 @@
     "react-dom": "^0.0.0-experimental-f6b8d31a7",
     "react-relay": "^0.0.0-experimental-a1a40b68",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.2.0",
     "relay-compiler": "^7.0.0",
     "relay-compiler-language-typescript": "^10.0.0",
     "styled-components": "^5.0.0-rc.1",
-    "typescript": "^3.7.1-rc"
+    "typescript": "^3.7.1-rc",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
