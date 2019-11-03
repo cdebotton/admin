@@ -102,10 +102,11 @@ type DeleteUserPayload {
   ): UsersEdge
 }
 
-type JwtToken {
-  role: String
-  userId: UUID
-}
+"""
+A JSON Web Token defined by [RFC 7519](https://tools.ietf.org/html/rfc7519)
+which securely represents claims between two parties.
+"""
+scalar JwtToken
 
 """
 The root mutation type which contains root level fields which mutate data.
@@ -219,6 +220,7 @@ type Query implements Node {
     condition: UserCondition
   ): UsersConnection
   userByUsername(username: String!): User
+  currentUser: User
 }
 
 """All input for the `registerUser` mutation."""

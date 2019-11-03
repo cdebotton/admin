@@ -5,7 +5,9 @@ import { postgraphile } from 'postgraphile';
 const {
   NODE_ENV = 'development',
   PORT: port = 3001,
-  DATABASE_URL: databaseURL = 'postgres://cdebotton@localhost:5432/cdb',
+  JWT_SECRET: jwtSecret = 'secret',
+  DATABASE_URL: databaseURL = 'postgres://app_postgraphile@localhost:5432/cdb',
+  OWNER_CONNECTION_STRING: ownerConnectionString = 'postgres://cdebotton@localhost:5432/cdb',
 } = process.env;
 
 const app = express();
@@ -19,7 +21,11 @@ app.use(
     graphiql: isDev,
     enhanceGraphiql: isDev,
     watchPg: isDev,
+    ownerConnectionString,
     exportGqlSchemaPath: isDev && '../data/schema.graphql',
+    jwtPgTypeIdentifier: 'app_public.jwt_token',
+    pgDefaultRole: 'app_anonymous',
+    jwtSecret,
   }),
 );
 

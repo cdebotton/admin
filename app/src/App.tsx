@@ -1,12 +1,11 @@
 import React, { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import { ThemeProvider } from 'styled-components/macro';
 
 import { Loader } from './components/Loader';
 import { GlobalStyle } from './components/GlobalStyle';
-import { environment } from './environment';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { EnvironmentProvider } from './components/EnvironmentProvider';
 
 const Home = lazy(() => import('./pages/Home'));
 const Admin = lazy(() => import('./pages/Admin'));
@@ -14,7 +13,7 @@ const Admin = lazy(() => import('./pages/Admin'));
 function App() {
   return (
     <ErrorBoundary>
-      <RelayEnvironmentProvider environment={environment}>
+      <EnvironmentProvider>
         <ThemeProvider theme={{ mode: 'dark', size: 2 }}>
           <Suspense fallback={<Loader />}>
             <GlobalStyle />
@@ -24,7 +23,7 @@ function App() {
             </Switch>
           </Suspense>
         </ThemeProvider>
-      </RelayEnvironmentProvider>
+      </EnvironmentProvider>
     </ErrorBoundary>
   );
 }

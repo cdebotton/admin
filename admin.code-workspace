@@ -1,0 +1,19 @@
+{
+  "folders": [
+	{
+		"path": "app"
+	},
+	{
+		"path": "data"
+	},
+	{
+		"path": "graphql"
+	},
+	{
+		"path": "db"
+	}
+],
+  "settings": {
+    "typescript.tsdk": "node_modules/typescript/lib"
+  }
+}

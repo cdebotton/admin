@@ -6,33 +6,27 @@ export type AuthenticateInput = {
     readonly email: string;
     readonly password: string;
 };
-export type AdminLoginAuthenticateMutationVariables = {
+export type LoginMutationVariables = {
     input: AuthenticateInput;
 };
-export type AdminLoginAuthenticateMutationResponse = {
+export type LoginMutationResponse = {
     readonly authenticate: {
-        readonly jwtToken: {
-            readonly role: string | null;
-            readonly userId: string | null;
-        } | null;
+        readonly jwtToken: string | null;
     } | null;
 };
-export type AdminLoginAuthenticateMutation = {
-    readonly response: AdminLoginAuthenticateMutationResponse;
-    readonly variables: AdminLoginAuthenticateMutationVariables;
+export type LoginMutation = {
+    readonly response: LoginMutationResponse;
+    readonly variables: LoginMutationVariables;
 };
 
 
 
 /*
-mutation AdminLoginAuthenticateMutation(
+mutation LoginMutation(
   $input: AuthenticateInput!
 ) {
   authenticate(input: $input) {
-    jwtToken {
-      role
-      userId
-    }
+    jwtToken
   }
 }
 */
@@ -63,29 +57,11 @@ v1 = [
     "plural": false,
     "selections": [
       {
-        "kind": "LinkedField",
+        "kind": "ScalarField",
         "alias": null,
         "name": "jwtToken",
-        "storageKey": null,
         "args": null,
-        "concreteType": "JwtToken",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "role",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "userId",
-            "args": null,
-            "storageKey": null
-          }
-        ]
+        "storageKey": null
       }
     ]
   }
@@ -94,7 +70,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "AdminLoginAuthenticateMutation",
+    "name": "LoginMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -102,18 +78,18 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "AdminLoginAuthenticateMutation",
+    "name": "LoginMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "AdminLoginAuthenticateMutation",
+    "name": "LoginMutation",
     "id": null,
-    "text": "mutation AdminLoginAuthenticateMutation(\n  $input: AuthenticateInput!\n) {\n  authenticate(input: $input) {\n    jwtToken {\n      role\n      userId\n    }\n  }\n}\n",
+    "text": "mutation LoginMutation(\n  $input: AuthenticateInput!\n) {\n  authenticate(input: $input) {\n    jwtToken\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '8d8ad82716a62e371fe872e7ce1e39c6';
+(node as any).hash = '88cc0e7f445957ed909a8b859c1d7718';
 export default node;

@@ -16,3 +16,5 @@ begin
   return registrant;
 end;
 $$ language plpgsql strict security definer;
+
+grant execute on function app_public.register_user(text, text, text) to app_anonymous;

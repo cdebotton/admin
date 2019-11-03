@@ -1,8 +1,8 @@
 import React from 'react';
 import graphql from 'babel-plugin-relay/macro';
-import { preloadQuery, usePreloadedQuery } from 'react-relay/hooks';
+import { useLazyLoadQuery } from 'react-relay/hooks';
 
-import { environment } from '../environment';
+import { HomeQuery } from '../__generated__/HomeQuery.graphql';
 
 const query = graphql`
   query HomeQuery {
@@ -20,15 +20,17 @@ const query = graphql`
   }
 `;
 
-const resource = preloadQuery(environment, query, {});
-
 function Home() {
-  const data = usePreloadedQuery(query, resource);
-
+  const data = useLazyLoadQuery<HomeQuery>(query, {});
+  console.log(data);
   return (
     <>
       <h1>Home</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <ul>
+        {data.allUsers!.edges.map(edge => {
+          return <li>{edge.node!.username}</li>;
+        })}
+      </ul>
     </>
   );
 }

@@ -1,39 +1,19 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { useRelayEnvironment } from 'react-relay/hooks';
-import { commitMutation } from 'react-relay';
-import graphql from 'babel-plugin-relay/macro';
 
 import { Input } from '../components/Input';
-import { AdminLoginAuthenticateMutation } from '../__generated__/AdminLoginAuthenticateMutation.graphql';
+import { useLoginMutation } from '../mutations/LoginMutation';
 
 type Values = {
   email: string;
   password: string;
 };
 
-const mutation = graphql`
-  mutation AdminLoginAuthenticateMutation($input: AuthenticateInput!) {
-    authenticate(input: $input) {
-      jwtToken {
-        role
-        userId
-      }
-    }
-  }
-`;
-
 function AdminLogin() {
-  const environment = useRelayEnvironment();
+  const login = useLoginMutation();
 
   function handleSubmit(input: Values) {
-    commitMutation<AdminLoginAuthenticateMutation>(environment, {
-      mutation,
-      variables: { input },
-      onCompleted(response) {
-        console.log(response);
-      },
-    });
+    login({ input });
   }
 
   return (
