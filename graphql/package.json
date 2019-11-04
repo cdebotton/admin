@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "PORT=3001 babel-node --extensions .ts src/index.ts"
+    "start": "DEBUG=postgraphql:* PORT=3001 babel-node --extensions .ts src/index.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",

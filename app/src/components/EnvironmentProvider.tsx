@@ -8,8 +8,23 @@ import React, {
 } from 'react';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import { Environment, RecordSource, Store, Network } from 'relay-runtime';
+import RelayQueryResponseCache from 'relay-runtime/lib/network/RelayQueryResponseCache';
 
-const network = Network.create(async (request, variables) => {
+const oneMinute = 60 * 1000;
+const cache = new RelayQueryResponseCache({ size: 250, ttl: oneMinute });
+
+const network = Network.create(async (request, variables, cacheConfig) => {
+  const queryID = request.text;
+  const isQuery = request.operationKind === 'query';
+  const isMutation = request.operationKind === 'mutation';
+  const forceFetch = cacheConfig && cacheConfig.force;
+
+  const fromCache = cache.get(queryID!, variables);
+
+  if (isQuery && fromCache !== null && !forceFetch) {
+    return fromCache;
+  }
+
   const token = localStorage.getItem('jwtToken');
 
   const headers: RequestInit['headers'] = {
@@ -31,6 +46,14 @@ const network = Network.create(async (request, variables) => {
   });
 
   const json = await response.json();
+
+  if (isQuery && json) {
+    cache.set(queryID!, variables, json);
+  }
+
+  if (isMutation) {
+    cache.clear();
+  }
 
   return json;
 });
