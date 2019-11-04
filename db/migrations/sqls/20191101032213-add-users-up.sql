@@ -10,6 +10,9 @@ alter table app_public.users enable row level security;
 grant select on table app_public.users to app_anonymous, app_user;
 grant insert, update, delete on table app_public.users to app_user;
 
+create policy select_user on app_public.users for select
+  using (true);
+
 create function app_public.current_user() returns app_public.users as $$
   select *
   from app_public.users
