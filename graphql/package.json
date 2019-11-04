@@ -20,7 +20,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^14.5.8",
-    "postgraphile": "^4.4.4"
+    "postgraphile": "^4.4.4",
+    "postgraphile-plugin-nested-mutations": "^1.0.1"
   },
   "prettier": {
     "trailingComma": "all",

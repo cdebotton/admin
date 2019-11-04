@@ -1,0 +1,1 @@
+drop function app_public.register_user(text, text, text, text, text);

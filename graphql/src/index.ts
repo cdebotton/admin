@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { postgraphile } from 'postgraphile';
+import PostGraphileNestedMutations from 'postgraphile-plugin-nested-mutations';
 
 const {
   NODE_ENV = 'development',
@@ -26,6 +27,7 @@ app.use(
     jwtPgTypeIdentifier: 'app_public.jwt_token',
     pgDefaultRole: 'app_anonymous',
     jwtSecret,
+    appendPlugins: [PostGraphileNestedMutations],
   }),
 );
 
